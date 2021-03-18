@@ -5,6 +5,7 @@ This is a reflection library for C/C++ that uses Flecs to store the meta definit
 
 The library supports:
  - Lots of primitive types
+ - External types
  - Enumerations
  - Bitmasks
  - Structs
@@ -82,6 +83,26 @@ Output:
 
 ```
 {name = "Foobar", value = 10, is_active = true}
+```
+
+### External types
+
+External types can be defined like any other type
+
+```c
+#include <library.h>
+
+ECS_STRUCT_EXTERN(vec2,
+{
+    float x;
+    float y;
+});
+
+ECS_STRUCT(Point
+{
+    vec2 Position;
+    bool draw;
+});
 ```
 
 ### Enumerations
