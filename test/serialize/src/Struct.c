@@ -20,6 +20,14 @@ ECS_STRUCT(i32_bool, {
     bool b;
 });
 
+ECS_ARRAY(Color, float, 4);
+
+ECS_STRUCT(StructWithArray,
+{
+    Line line;
+    Color color;
+});
+
 void Struct_struct() {
     ecs_world_t *world = ecs_init();
 
@@ -83,6 +91,23 @@ void Struct_struct_i32_bool() {
     i32_bool value = {10, false};
     char *str = ecs_ptr_to_str(world, ecs_entity(i32_bool), &value);
     test_str(str, "{i = 10, b = false}");
+    ecs_os_free(str);
+    }
+
+    ecs_fini(world);
+}
+
+void Struct_array_member() {
+    ecs_world_t *world = ecs_init();
+
+    ECS_IMPORT(world, FlecsMeta);
+
+    ECS_META(world, StructWithArray);
+
+    {
+    StructWithArray value = { 0 };
+    char *str = ecs_ptr_to_str(world, ecs_entity(StructWithArray), &value);
+    test_str(str, "{x = 10, y = 20}");
     ecs_os_free(str);
     }
 

@@ -39,7 +39,8 @@
                 "struct",
                 "nested_struct",
                 "struct_bool_i32",
-                "struct_i32_bool"
+                "struct_i32_bool",
+                "struct_array_member"
             ]
         }, {
             "id": "Enum",

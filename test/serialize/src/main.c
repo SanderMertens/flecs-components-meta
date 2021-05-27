@@ -32,6 +32,7 @@ void Struct_struct(void);
 void Struct_nested_struct(void);
 void Struct_struct_bool_i32(void);
 void Struct_struct_i32_bool(void);
+void Struct_array_member(void);
 
 // Testsuite 'Enum'
 void Enum_enum(void);
@@ -173,6 +174,10 @@ bake_test_case Struct_testcases[] = {
     {
         "struct_i32_bool",
         Struct_struct_i32_bool
+    },
+    {
+        "struct_array_member",
+        Struct_array_member
     }
 };
 
@@ -375,7 +380,7 @@ static bake_test_suite suites[] = {
         "Struct",
         NULL,
         NULL,
-        4,
+        5,
         Struct_testcases
     },
     {
