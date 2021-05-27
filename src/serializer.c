@@ -209,8 +209,18 @@ ecs_vector_t* serialize_struct(
         op->name = members[i].name;
 
         const EcsMetaType *meta_type = ecs_get(world, members[i].type, EcsMetaType);
-        ecs_size_t member_size = meta_type->size * (meta_type->kind == EcsStructType ? 1 : op->count);
         int16_t member_alignment = meta_type->alignment;
+        ecs_size_t member_size;
+
+        if (meta_type->kind == EcsStructType) {
+            member_size = meta_type->size;
+        }
+        else if (meta_type->kind == EcsArrayType) {
+            member_size = op->size * op->count;
+        }
+        else {
+            member_size = meta_type->size * op->count;
+        }
 
         ecs_assert(member_size != 0, ECS_INTERNAL_ERROR, op->name);
         ecs_assert(member_alignment != 0, ECS_INTERNAL_ERROR, op->name);
